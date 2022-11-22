@@ -1,0 +1,145 @@
+{%- if se_bks.size > 0 -%}
+<div class="t4s-page-head t4s-oh t4s-text-center"> 
+   <div class="t4s-container t4s-pr">
+      {%- for block in se_bks -%}  
+      	{%- assign bk_stts = block.settings -%}
+        {%- case block.type -%}
+            {%- when '1' -%} 
+              {%- assign general_block = true -%}
+
+              <h1 class="t4s-title-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-hidden-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'heading_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>{{ collection.title }}</h1>
+            
+            {%- when '2' -%}
+               {%- liquid
+               if bk_stts.content == blank
+               	continue
+               endif
+               assign general_block = true -%}
+              <div class="t4s-desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-hidden-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'heading_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>{{ block.settings.content }}</div>
+            
+            {%- when '3' -%}
+              <nav class="t4s-breadcrumbs" role="navigation" aria-label="breadcrumbs" style="--brc-cl: {{ bk_stts.breadcrumb_color }};--brc-cl-link: {{ bk_stts.breadcrumb_color_link }};--brc_mgb: {{ bk_stts.brc_mgb }}px;--brc-cl-trans: {{ bk_stts.breadcrumb_cl_trans }};--brc-cl-link-trans: {{ bk_stts.breadcrumb_color_link_trans }};"> 
+                  <ul class="t4s-breadcrumbs__list">
+                     <li class="t4s-breadcrumbs__item">
+                          <a href="{{ routes.root_url }}" class="t4s-dib">{{ 'general.breadcrumb.home' | t }}</a> <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+                      </li>
+                      {%- if current_tags -%}
+                      <li class="t4s-breadcrumbs__item">
+                          {{ collection.title | link_to: collection.url }} <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+                      </li>
+                      <li class="t4s-breadcrumbs__item" aria-current="page"><span>{{ current_tags | join: ", " }}</span></li>
+                      {%- else -%} 
+                      <li class="t4s-breadcrumbs__item" aria-current="page"><span>{{ collection.title }}</span></li>
+                      {%- endif -%}
+                  </ul>
+              </nav> 
+			      {%- when '4' -%}
+               {%- liquid
+               assign cl_des = collection.description
+               if cl_des == blank
+               	continue
+               endif
+               assign general_block = true
+               -%}
+              {%- capture view_more -%}
+                  {%- if bk_stts.view_more and bk_stts.viewm_txt != blank and collection.description != blank -%}<a href="#t4s-desc-collection" class="t4s-cl-des-viewm" data-go-id data-no-instant>{{ bk_stts.viewm_txt }}</a>{% endif -%}
+              {%- endcapture -%}
+              <div class="t4s-desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-hidden-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}{% if bk_stts.design_des == "show_all" %} t4s-rte{% endif %}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'heading_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>
+                  {%- if bk_stts.design_des == "show_all" -%}{{ cl_des }}{%- else -%}{{- cl_des | strip_html | truncatewords: bk_stts.length -}}<br>{{ view_more }}{%- endif -%}
+              </div>
+            {%- when '5' -%}
+              {{ 'top-collections.css' | asset_url | stylesheet_tag }}
+              {{ 'slider-settings.css' | asset_url | stylesheet_tag }}
+              {{ 'pre_flickityt4s.min.css' | asset_url | stylesheet_tag }}
+              <link href="{{ 'loading.css' | asset_url }}" rel="stylesheet" media="print" onload="this.media='all'">
+              <style>
+                {%- if bk_stts.show_thumb_cl == false -%} 
+                  .t4s-top-collections .t4s-thumb-cl{
+                    display: none;
+                  }
+                {%- endif -%}
+                
+              </style>
+              {%- capture current -%}{%- cycle 1, 2, 3, 4, 5, 6 -%}{%- endcapture -%}
+              {% if collections.size > 0 %}
+                 <div class="t4s-top-collections t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-nav-{{ bk_stts.nav_btn }} t4s_ratio1_1 t4s_position_8 t4s_cover">
+                    <div class="t4s-top-list-collections t4s-row t4s-g-0 t4s-align-items-center t4s-justify-content-center t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-flickity-slider t4s-slider-btn-style-simple t4s-slider-btn-none t4s-slider-btn-small t4s-slider-btn-vi-always flickityt4s" data-flickityt4s-js='{"freeScroll": true,"initialIndex": ".t4s-current-cat", "setPrevNextButtons": {{ bk_stts.nav_btn }}, "arrowIcon": "1", "imagesLoaded": 0,"adaptiveHeight": 0, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "wrapAround": false,"prevNextButtons": {{ bk_stts.nav_btn }},"percentPosition": 0,"pageDots": false, "pauseAutoPlayOnHover" : true }' style="--text-cl-trans:{{ bk_stts.text_cl_trans }};--text-cl:{{ bk_stts.text_cl }};--text-fs:{{ bk_stts.text_fs }}px;--text-fw:{{ bk_stts.text_fw }};--text-lh:{{ bk_stts.text_lh }}px;--text-ls:{{ bk_stts.text_ls }}px;--space-item:{{ bk_stts.space_item }}px;">         
+                      {%- assign se_sort = bk_stts.sort_collections -%}
+                      {%- assign show_thumb_cl = bk_stts.show_thumb_cl -%}
+                      {%- if bk_stts.source == '1' and collections.size > 0 -%}
+                        {%- case se_sort -%}
+                          {%- when 'products_high' or 'products_low' -%}
+                            {%- assign collections = collections | sort: 'all_products_count' -%}
+                          {%- when 'date' or 'date_reversed' -%}
+                            {%- assign collections = collections | sort: 'published_at' -%}
+                        {%- endcase -%}
+                        {%- if se_sort == 'products_low' or se_sort == 'date' or se_sort == 'alphabetical' -%}
+                          {%- for category in collections -%}
+                            {%- if category.products.size == 0 %}{% continue %}{% endif %}
+                            <div class="t4s-col-auto t4s-col-item t4s-cat-item{% if collection.handle == category.handle %} t4s-current-cat{% endif %}"><a data-main-filters-link class="cat_link" href="{{ category.url }}">
+                              {%- if show_thumb_cl -%}
+                                {%- assign image = category.image | default: category.products.first.featured_image -%} 
+                                {% if image != blank %}
+                                  <div class="t4s_ratio t4s-thumb-cl" >
+                                    <img class="lazyloadt4s t4s-lz--fadeIn t4s-obj-eff" data-src="{{ image | image_url: width: 1 }}" data-widths="[100,200,400,600,700,800,900,1000,1200,1400,1600]" data-optimumx="2" data-sizes="auto" src=" {%- render 'img_svg', w: image.width, h: image.height -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape }}">
+                                    <span class="lazyloadt4s-loader is-bg-img" style="background: url({{ image | image_url: width: 1 }});"></span>     
+                                  </div> 
+                                {% else %}
+                                  <div class="t4s_ratio t4s-thumb-cl" >
+                                    {{ 'collection-' | append: current | placeholder_svg_tag: 't4s-placeholder-svg t4s-obj-eff' }}  
+                                  </div>
+                                {% endif %}
+                              {%- endif -%}
+                              <span>{{ category.title }}</span></a></div>
+                          {%- endfor -%}
+
+                        {%- else -%}
+                           {%- for category in collections reversed -%}
+                              {%- if category.products.size == 0 %}{% continue %}{% endif %}
+                              <div class="t4s-col-auto t4s-col-item t4s-cat-item{% if collection.handle == category.handle %} t4s-current-cat{% endif %}"><a class="cat_link dib" href="{{ category.url }}">
+                                {%- if show_thumb_cl -%}
+                                  {%- assign image = category.image | default: category.products.first.featured_image -%} 
+                                  {% if image != blank %}
+                                  <div class="t4s_ratio t4s-thumb-cl">
+                                    <img class="lazyloadt4s t4s-lz--fadeIn t4s-obj-eff" data-src="{{ image | image_url: width: 1 }}" data-widths="[100,200,400,600,700,800,900,1000,1200,1400,1600]" data-optimumx="2" data-sizes="auto" src=" {%- render 'img_svg', w: image.width, h: image.height -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape }}">
+                                    <span class="lazyloadt4s-loader is-bg-img" style="background: url({{ image | image_url: width: 1 }});"></span>     
+                                  </div>
+                                  {% else %}
+                                    <div class="t4s_ratio t4s-thumb-cl" >
+                                      {{ 'collection-' | append: current | placeholder_svg_tag: 't4s-placeholder-svg t4s-obj-eff' }}  
+                                    </div>
+                                  {% endif %}
+                                {%- endif -%}
+                                <span>{{ category.title }}</span></a></div>
+                           {%- endfor -%}
+                        {%- endif -%}
+                      {%- elsif bk_stts.source == '2' and bk_stts.collection_list != blank -%}
+                        {%- for category in bk_stts.collection_list -%}
+                          <div class="t4s-col-auto t4s-col-item t4s-cat-item{% if collection.handle == category.handle %} t4s-current-cat{% endif %}"><a class="cat_link dib" href="{{ category.url }}">
+                                {%- if show_thumb_cl -%}
+                                  {%- assign image = category.image | default: category.products.first.featured_image -%} 
+                                  {% if image != blank %}
+                                  <div class="t4s_ratio t4s-thumb-cl">
+                                    <img class="lazyloadt4s t4s-lz--fadeIn t4s-obj-eff" data-src="{{ image | image_url: width: 1 }}" data-widths="[100,200,400,600,700,800,900,1000,1200,1400,1600]" data-optimumx="2" data-sizes="auto" src=" {%- render 'img_svg', w: image.width, h: image.height -%}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape }}">
+                                    <span class="lazyloadt4s-loader is-bg-img" style="background: url({{ image | image_url: width: 1 }});"></span>     
+                                  </div>
+                                  {% else %}
+                                    <div class="t4s_ratio t4s-thumb-cl" >
+                                      {{ 'collection-' | append: current | placeholder_svg_tag: 't4s-placeholder-svg t4s-obj-eff' }}  
+                                    </div>
+                                  {% endif %}
+                                {%- endif -%}
+                                <span>{{ category.title }}</span></a></div>
+                        {%- endfor -%}
+                      {%- endif -%}
+                    </div>
+                  </div>  
+              {%- endif -%}
+        {%- endcase -%} 
+      {%- endfor -%}
+   </div>
+</div> 
+{%- endif -%}
+{%- if general_block -%}
+    {{ 'general-block.css' | asset_url | stylesheet_tag }}
+{%- endif -%}

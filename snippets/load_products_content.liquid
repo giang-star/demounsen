@@ -1,0 +1,263 @@
+{%- liquid
+	assign search_types = search.types 
+    assign search_terms = search.terms 
+	assign show_img = settings.show_img
+    assign isGrowaveWishlist = false
+    if settings.wishlist_mode == "3" and shop.customer_accounts_enabled
+        assign isGrowaveWishlist = true
+    endif
+    assign placeholder_img = settings.placeholder_img
+    assign enable_pr_size = settings.enable_pr_size
+    assign pr_size_pos = settings.pr_size_pos
+    assign show_size_type = settings.show_size_type
+    assign size_ck = settings.size_ck | append: ',size,sizes,Größe' 
+    assign get_size = size_ck | downcase | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq
+
+    assign enable_pr_color = settings.enable_pr_color
+    assign show_cl_type = settings.show_color_type
+    assign color_ck = settings.color_ck | append: ',color,colors,couleur,colour'
+    assign get_color = color_ck | downcase | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq
+
+    assign price_varies_style = settings.price_varies_style
+    assign app_review = settings.app_review
+    assign enable_rating = settings.enable_rating
+    assign use_link_vendor = settings.use_link_vendor
+ -%}
+
+{%- for block in section.blocks %}
+
+	{%-liquid
+		assign bk_stts = block.settings 
+		assign product_des = bk_stts.product_des
+		if enable_rating
+			assign rating_pos = bk_stts.rating_pos
+		endif
+		assign layout_des = bk_stts.layout_des
+		assign limit = bk_stts.limit
+		assign image_ratio = bk_stts.image_ratio
+		if image_ratio == "ratioadapt"
+			assign imgatt = ''
+		else 
+			assign imgatt = 'data-'
+		endif 
+		if bk_stts.btn_owl == "outline"
+			assign arrow_icon = 1
+		else
+			assign arrow_icon = 2
+		endif
+		assign nav_dot = bk_stts.nav_dot
+		assign show_vendor = bk_stts.show_vendor
+		assign use_countdown = bk_stts.use_cdt
+	 -%}
+   
+   	{%- if block.type == 'recently' -%}
+
+		{%- if products_count >= 0 or search_types contains 'page' or search_terms contains 'vendor' or search_terms contains 'product_type' -%}{% continue %}{% endif -%}
+
+		{%- paginate search.results by limit -%}
+			{%- assign sortby = bk_stts.sortby | plus: 0 -%}
+			{%- case sortby -%}
+				{%- when 5 or 6 -%}
+				{%- assign results = search.results | sort: 'price' -%}
+				{%- when 7 or 8 -%}
+				{%- assign results = search.results | sort: 'published_at' -%}
+				{%- else -%}
+				{%- assign results = search.results -%}
+			{%- endcase -%}
+			{%- assign modu = sortby | modulo: 2 -%}
+		
+				{%- render 'block_tophead', bk_stts: bk_stts -%}
+				{%- if bk_stts.layout_des == "1" -%} 
+				<div data-collection-url="{{ collection.url }}" data-contentlm-replace class="t4s_box_pr_grid t4s-products t4s-justify-content-center t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }}">
+				{%- else -%}
+				<div data-collection-url="{{ collection.url }}" data-t4s-resizeobserver class="t4s-flickity-slider t4s_box_pr_slider t4s-products t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} {% if bk_stts.nav_btn %}t4s-slider-btn__{{ bk_stts.btn_pos }}-content t4s-slider-btn-style-{{ bk_stts.btn_owl }} t4s-slider-btn-{{ bk_stts.btn_shape }} t4s-slider-btn-{{ bk_stts.btn_size }} t4s-slider-btn-cl-{{ bk_stts.btn_cl }} t4s-slider-btn-vi-{{ bk_stts.btn_vi }} t4s-slider-btn-hidden-mobile-{{ bk_stts.btn_hidden_mobile }} {% endif %} {% if bk_stts.nav_dot == true %}  t4s-dots-style-{{ bk_stts.dot_owl }} t4s-dots-cl-{{ bk_stts.dots_cl }} t4s-dots-round-{{ bk_stts.dots_round }} t4s-dots-hidden-mobile-{{ bk_stts.dots_hidden_mobile }}{% endif %} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }} flickityt4s" data-flickityt4s-js='{"setPrevNextButtons": true,"arrowIcon": "{{ arrow_icon }}","imagesLoaded": 0,"adaptiveHeight": 1, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{ bk_stts.loop }},"prevNextButtons": {{ bk_stts.nav_btn }},"percentPosition": 1,"pageDots": {{ bk_stts.nav_dot }}, "autoPlay" : {{ bk_stts.au_time | times: 1000 }}, "pauseAutoPlayOnHover" : {{ bk_stts.au_hover }} }' style="--btn-distance: {{ bk_stts.btn_distance }}px;--space-dots: {{ bk_stts.dots_space }}px;{% if nav_dot %}--dots-bottom-pos: 36px;{% endif %}">
+				{%- endif -%}
+					{%- if sortby == 1 -%}
+					1
+						{%- assign array = search.terms | remove: 'id:' | split: ' OR ' -%}
+						{%- for i in array -%}{%- assign j = i | plus: 0 -%}{%- assign item = results | where: "id", j -%}
+							{%- if item == blank %}{% continue %}{% endif -%}
+							{%- case product_des -%}
+								{%- when '1' -%}
+									{%- render 'pr-grid-item1', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- when '2' -%}
+									{%- render 'pr-grid-item2', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- when '3' -%}
+									{%- render 'pr-grid-item3', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- when '4' -%}
+									{%- render 'pr-grid-item4', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- endcase -%}
+						{%- endfor -%}
+					{%- elsif sortby == 2 -%}
+					2
+						{%- assign array = search.terms | remove: 'id:' | split: ' OR ' -%}
+
+						{%- for i in array reversed -%}{%- assign j = i | plus: 0 -%}{%- assign item = results | where: "id", j -%}
+							{%- if item == blank %}{% continue %}{% endif -%}
+							{%- case product_des -%}
+							{%- when '1' -%}
+								{%- render 'pr-grid-item1', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- when '2' -%}
+								{%- render 'pr-grid-item2', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- when '3' -%}
+								{%- render 'pr-grid-item3', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- when '4' -%}
+								{%- render 'pr-grid-item4', product: item[0], isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- endcase -%}
+						{%- endfor -%}
+
+					{%- else -%}
+
+						{%- if modu == 0 -%}
+							{%- for product in results -%}
+								{%- case product_des -%}
+								{%- when '1' -%}
+									{%- render 'pr-grid-item1', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- when '2' -%}
+									{%- render 'pr-grid-item2', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- when '3' -%}
+									{%- render 'pr-grid-item3', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- when '4' -%}
+									{%- render 'pr-grid-item4', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- endcase -%}
+							{%- endfor -%}
+						{%- else -%}
+							{%- for product in results reversed -%}
+								{%- case product_des -%}
+									{%- when '1' -%}
+										{%- render 'pr-grid-item1', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+									{%- when '2' -%}
+										{%- render 'pr-grid-item2', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+									{%- when '3' -%}
+										{%- render 'pr-grid-item3', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+									{%- when '4' -%}
+										{%- render 'pr-grid-item4', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+								{%- endcase -%}
+							{%- endfor -%}
+						{%- endif -%}
+					{%- endif -%}
+				</div>
+		{%- endpaginate -%}
+
+	{%- else -%}
+
+	   	{%- if search_types contains 'product' and search_terms contains 'id:' -%}{% continue %}{% endif -%}
+	   	
+	   	{%- liquid 
+			assign display_type   = bk_stts.display_type | default: '3'
+			assign search_terms   = search.terms
+			if request.page_type == 'search' and display_type == '1' or display_type == '2'
+				if display_type == '1'
+				   if search_terms contains 'cart_related'
+                  assign product_list = bk_stts.product_list
+                  assign pid          = 19041994
+						assign data_url     = '-none'
+               else 
+						assign arr_terms  = search.terms | split: ' '
+						assign product    = all_products[arr_terms.first]
+						assign collection = collections[arr_terms.last]
+						assign pid        = product.id
+						assign data_url   = ''
+               endif
+				else 
+					assign product = all_products[search.terms]
+					assign pid            = product.id
+					assign rid            = 'relatedt4_' | append: pid
+					assign relatedt4__tag = product.tags | where: 'relatedt4_' | first | default: rid | remove: 'relatedt4_'
+					assign pr_link        = linklists[relatedt4__tag].links | where: "type", "product_link" 
+				endif
+			endif 
+		 -%}
+	   	{%- if display_type == "3" and recommendations.products_count > 0 -%}
+			{%- render 'block_tophead', bk_stts: bk_stts -%}
+			{%- if bk_stts.layout_des == "1" -%} 
+			<div data-collection-url="{{ collection.url }}" data-contentlm-replace class="t4s_box_pr_grid t4s-products t4s-justify-content-center t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }}">
+			{%- else -%}
+			<div data-collection-url="{{ collection.url }}" data-t4s-resizeobserver class="t4s-flickity-slider t4s_box_pr_slider t4s-products t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} {% if bk_stts.nav_btn %}t4s-slider-btn__{{ bk_stts.btn_pos }}-content t4s-slider-btn-style-{{ bk_stts.btn_owl }} t4s-slider-btn-{{ bk_stts.btn_shape }} t4s-slider-btn-{{ bk_stts.btn_size }} t4s-slider-btn-cl-{{ bk_stts.btn_cl }} t4s-slider-btn-vi-{{ bk_stts.btn_vi }} t4s-slider-btn-hidden-mobile-{{ bk_stts.btn_hidden_mobile }} {% endif %} {% if bk_stts.nav_dot == true %}  t4s-dots-style-{{ bk_stts.dot_owl }} t4s-dots-cl-{{ bk_stts.dots_cl }} t4s-dots-round-{{ bk_stts.dots_round }} t4s-dots-hidden-mobile-{{ bk_stts.dots_hidden_mobile }}{% endif %} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }} flickityt4s" data-flickityt4s-js='{"setPrevNextButtons": true,"arrowIcon": "{{ arrow_icon }}","imagesLoaded": 0,"adaptiveHeight": 1, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{ bk_stts.loop }},"prevNextButtons": {{ bk_stts.nav_btn }},"percentPosition": 1,"pageDots": {{ bk_stts.nav_dot }}, "autoPlay" : {{ bk_stts.au_time | times: 1000 }}, "pauseAutoPlayOnHover" : {{ bk_stts.au_hover }} }' style="--btn-distance: {{ bk_stts.btn_distance }}px;--space-dots: {{ bk_stts.dots_space }}px;{% if nav_dot %}--dots-bottom-pos: 36px;{% endif %}">
+			{%- endif -%}
+				{%- for product in recommendations.products -%}
+					{%- case product_des -%}
+						{%- when '1' -%}
+							{%- render 'pr-grid-item1', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '2' -%}
+							{%- render 'pr-grid-item2', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '3' -%}
+							{%- render 'pr-grid-item3', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '4' -%}
+							{%- render 'pr-grid-item4', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+					{%- endcase -%}
+				{%- endfor -%}
+			</div>
+	    {%- elsif display_type == "2" and pr_link.size > 0 and search_types contains 'page' -%}{%- assign index = 0 -%}
+			{%- render 'block_tophead', bk_stts: bk_stts -%}
+			{%- if bk_stts.layout_des == "1" -%} 
+			<div data-collection-url="{{ collection.url }}" data-contentlm-replace class="t4s_box_pr_grid t4s-products t4s-justify-content-center t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }}">
+			{%- else -%}
+			<div data-collection-url="{{ collection.url }}" data-t4s-resizeobserver class="t4s-flickity-slider t4s_box_pr_slider t4s-products t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} {% if bk_stts.nav_btn %}t4s-slider-btn__{{ bk_stts.btn_pos }}-content t4s-slider-btn-style-{{ bk_stts.btn_owl }} t4s-slider-btn-{{ bk_stts.btn_shape }} t4s-slider-btn-{{ bk_stts.btn_size }} t4s-slider-btn-cl-{{ bk_stts.btn_cl }} t4s-slider-btn-vi-{{ bk_stts.btn_vi }} t4s-slider-btn-hidden-mobile-{{ bk_stts.btn_hidden_mobile }} {% endif %} {% if bk_stts.nav_dot == true %}  t4s-dots-style-{{ bk_stts.dot_owl }} t4s-dots-cl-{{ bk_stts.dots_cl }} t4s-dots-round-{{ bk_stts.dots_round }} t4s-dots-hidden-mobile-{{ bk_stts.dots_hidden_mobile }}{% endif %} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }} flickityt4s" data-flickityt4s-js='{"setPrevNextButtons": true,"arrowIcon": "{{ arrow_icon }}","imagesLoaded": 0,"adaptiveHeight": 1, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{ bk_stts.loop }},"prevNextButtons": {{ bk_stts.nav_btn }},"percentPosition": 1,"pageDots": {{ bk_stts.nav_dot }}, "autoPlay" : {{ bk_stts.au_time | times: 1000 }}, "pauseAutoPlayOnHover" : {{ bk_stts.au_hover }} }' style="--btn-distance: {{ bk_stts.btn_distance }}px;--space-dots: {{ bk_stts.dots_space }}px;{% if nav_dot %}--dots-bottom-pos: 36px;{% endif %}">
+			{%- endif -%}
+				{%- for link in pr_link -%}
+					{%- if pid == link.object.id -%}{%- continue -%}{%- endif -%}
+					{%- if index == limit -%}{%- break -%}{%- endif -%}
+					{%- assign index = index | plus: 1 -%}
+					{%- case product_des -%}
+						{%- when '1' -%}
+							{%- render 'pr-grid-item1', product: link.object, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '2' -%}
+							{%- render 'pr-grid-item2', product: link.object, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '3' -%}
+							{%- render 'pr-grid-item3', product: link.object, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '4' -%}
+							{%- render 'pr-grid-item4', product: link.object, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+					{%- endcase -%}
+				{%- endfor -%}
+			</div>
+	    {%- elsif display_type == "1" and search_types contains 'page' and collection != blank or product_list != blank -%}
+			{%- render 'block_tophead', bk_stts: bk_stts -%}
+			{%- if bk_stts.layout_des == "1" -%} 
+			<div data-collection-url{{ data_url }}="{{ collection.url }}" data-contentlm-replace class="t4s_box_pr_grid t4s-products t4s-justify-content-center t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }}">
+			{%- else -%}
+			<div data-collection-url{{ data_url }}="{{ collection.url }}" data-t4s-resizeobserver class="t4s-flickity-slider t4s_box_pr_slider t4s-products t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} {% if bk_stts.nav_btn %}t4s-slider-btn__{{ bk_stts.btn_pos }}-content t4s-slider-btn-style-{{ bk_stts.btn_owl }} t4s-slider-btn-{{ bk_stts.btn_shape }} t4s-slider-btn-{{ bk_stts.btn_size }} t4s-slider-btn-cl-{{ bk_stts.btn_cl }} t4s-slider-btn-vi-{{ bk_stts.btn_vi }} t4s-slider-btn-hidden-mobile-{{ bk_stts.btn_hidden_mobile }} {% endif %} {% if bk_stts.nav_dot == true %}  t4s-dots-style-{{ bk_stts.dot_owl }} t4s-dots-cl-{{ bk_stts.dots_cl }} t4s-dots-round-{{ bk_stts.dots_round }} t4s-dots-hidden-mobile-{{ bk_stts.dots_hidden_mobile }}{% endif %} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }} flickityt4s" data-flickityt4s-js='{"setPrevNextButtons": true,"arrowIcon": "{{ arrow_icon }}","imagesLoaded": 0,"adaptiveHeight": 1, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{ bk_stts.loop }},"prevNextButtons": {{ bk_stts.nav_btn }},"percentPosition": 1,"pageDots": {{ bk_stts.nav_dot }}, "autoPlay" : {{ bk_stts.au_time | times: 1000 }}, "pauseAutoPlayOnHover" : {{ bk_stts.au_hover }} }' style="--btn-distance: {{ bk_stts.btn_distance }}px;--space-dots: {{ bk_stts.dots_space }}px;{% if nav_dot %}--dots-bottom-pos: 36px;{% endif %}">
+			{%- endif -%}
+			   {%- assign array_products = product_list | default: collection.products -%}
+				{%- for product in array_products -%}
+					{%- if pid == product.id -%}{%- continue -%}{%- endif -%}
+					{%- if index == limit -%}{%- break -%}{%- endif -%}
+					{%- assign index = index | plus: 1 -%}
+					{%- case product_des -%}
+						{%- when '1' -%}
+							{%- render 'pr-grid-item1', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '2' -%}
+							{%- render 'pr-grid-item2', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '3' -%}
+							{%- render 'pr-grid-item3', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- when '4' -%}
+							{%- render 'pr-grid-item4', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+					{%- endcase -%}
+				{%- endfor -%}
+			</div>
+		{%- elsif search.results.size > 0 and request.page_type == 'search' -%}
+			{%- comment -%} display_type 4, 5 {%- endcomment -%}
+				{%- render 'block_tophead', bk_stts: bk_stts -%}
+				{%- if bk_stts.layout_des == "1" -%} 
+				<div data-collection-url="{{ collection.url }}" data-contentlm-replace class="t4s_box_pr_grid t4s-products t4s-justify-content-center t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }}">
+				{%- else -%}
+				<div data-collection-url="{{ collection.url }}" data-t4s-resizeobserver class="t4s-flickity-slider t4s_box_pr_slider t4s-products t4s-text-{{ bk_stts.content_align }} t4s_{{ image_ratio }} t4s_position_{{ bk_stts.image_position }} t4s_{{ bk_stts.image_size }} {% if bk_stts.nav_btn %}t4s-slider-btn__{{ bk_stts.btn_pos }}-content t4s-slider-btn-style-{{ bk_stts.btn_owl }} t4s-slider-btn-{{ bk_stts.btn_shape }} t4s-slider-btn-{{ bk_stts.btn_size }} t4s-slider-btn-cl-{{ bk_stts.btn_cl }} t4s-slider-btn-vi-{{ bk_stts.btn_vi }} t4s-slider-btn-hidden-mobile-{{ bk_stts.btn_hidden_mobile }} {% endif %} {% if bk_stts.nav_dot == true %}  t4s-dots-style-{{ bk_stts.dot_owl }} t4s-dots-cl-{{ bk_stts.dots_cl }} t4s-dots-round-{{ bk_stts.dots_round }} t4s-dots-hidden-mobile-{{ bk_stts.dots_hidden_mobile }}{% endif %} t4s-row t4s-row-cols-lg-{{ bk_stts.col_dk }} t4s-row-cols-md-{{ bk_stts.col_tb }} t4s-row-cols-{{ bk_stts.col_mb }} t4s-gx-lg-{{ bk_stts.space_h_item }} t4s-gy-lg-{{ bk_stts.space_v_item }} t4s-gx-md-{{ bk_stts.space_h_item_tb }} t4s-gy-md-{{ bk_stts.space_v_item_tb }} t4s-gx-{{ bk_stts.space_h_item_mb }} t4s-gy-{{ bk_stts.space_v_item_mb }} flickityt4s" data-flickityt4s-js='{"setPrevNextButtons": true,"arrowIcon": "{{ arrow_icon }}","imagesLoaded": 0,"adaptiveHeight": 1, "contain": 1, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{ bk_stts.loop }},"prevNextButtons": {{ bk_stts.nav_btn }},"percentPosition": 1,"pageDots": {{ bk_stts.nav_dot }}, "autoPlay" : {{ bk_stts.au_time | times: 1000 }}, "pauseAutoPlayOnHover" : {{ bk_stts.au_hover }} }' style="--btn-distance: {{ bk_stts.btn_distance }}px;--space-dots: {{ bk_stts.dots_space }}px;{% if nav_dot %}--dots-bottom-pos: 36px;{% endif %}">
+				{%- endif -%}
+					{%- for product in search.results limit: limit -%}
+						{%- case product_des -%}
+							{%- when '1' -%}
+								{%- render 'pr-grid-item1', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- when '2' -%}
+								{%- render 'pr-grid-item2', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- when '3' -%}
+								{%- render 'pr-grid-item3', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+							{%- when '4' -%}
+								{%- render 'pr-grid-item4', product: product, isGrowaveWishlist: isGrowaveWishlist, show_img: show_img, show_vendor: show_vendor, use_link_vendor: use_link_vendor, rating_pos: rating_pos, list_color_pos: list_color_pos, list_size_pos: list_size_pos, enable_pr_color: enable_pr_color, show_cl_type: show_cl_type, get_color: get_color, enable_pr_size: enable_pr_size, pr_size_pos: pr_size_pos, get_size: get_size, show_size_type: show_size_type, price_varies_style: price_varies_style, app_review: app_review, enable_rating: enable_rating, use_countdown: use_countdown, imgatt: imgatt, show_list_btns: false, placeholder_img: placeholder_img -%}
+						{%- endcase -%}
+					{%- endfor -%}
+				</div>
+		{%- endif -%}
+
+	{%- endif -%}
+
+{%- endfor -%}

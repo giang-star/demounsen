@@ -1,0 +1,100 @@
+[t4splitlz]
+{%- assign product_form_id = 'product-form-' | append: pr_sid -%}
+{%- liquid 
+    assign pr_variants = product.variants
+    assign date_in = settings.date_in
+    assign class_frm = 't4s-form__product has--form__swatch'
+    if settings.sticky_atc and type == 'main'
+        assign class_frm =  class_frm | append: ' is--main-sticky'
+    else if settings.sticky_atc and type == 'main_sticky'
+        assign class_frm =  class_frm | append: ' is--atc-sticky'
+    endif
+    assign color_swatch    = 'disabled-'
+    assign color_mode      = bk_stts.color_mode
+    assign selector_mode   = bk_stts.selector_mode
+    assign stt_color_ck    = settings.color_ck | default: ';'
+    assign color_ck        = stt_color_ck | append: ',color,colors,couleur,colour' | remove: ';,'
+    assign get_color       = color_ck | downcase | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq
+    assign color_mode_list = 'color, color is-sw-cl__round, color is-sw-cl__round is-sw-cl__label, variant_image, variant_image is-sw-cl__round' | split: ', '
+    if color_mode_list contains color_mode
+        assign color_swatch  = 'is-sw__color '
+    endif
+    assign color_swatch  = 'is-sw__color '
+    assign current_variant_available = current_variant.available
+ -%}
+{%- form 'product', product, id: null, data-productid: product.id, class: class_frm, novalidate: 'novalidate', data-type: 'add-to-cart-form', data-disable-swatch: isProductDefault -%}
+    <select name="id" id="product-select-{{ pr_sid }}" class="t4s-product__select t4s-d-none">
+        {%- for variant in pr_variants -%}
+            {%- if variant.available -%}
+                <option value="{{ variant.id }}" data-mdid="{{ variant.featured_media.id | json }}" data-incoming="{{ variant.incoming }}" data-inventoryQuantity="{{ variant.inventory_quantity | json }}" data-nextIncomingDate="{{ variant.next_incoming_date | date: date_in }}"{% if variant.id == current_variant.id %} selected="selected"{% endif %}>{{ variant.title | escape }}</option>
+            {%- else -%}
+                <option value="{{ variant.id }}" data-mdid="{{ variant.featured_media.id | json }}" data-incoming="{{ variant.incoming }}" data-inventoryQuantity="{{ variant.inventory_quantity | json }}" data-nextIncomingDate="{{ variant.next_incoming_date | date: date_in }}"{% if remove_soldout %} disabled="disabled"{% endif %} class="is--sold-out">{{ variant.title | escape }}</option>
+            {%- endif -%}
+        {%- endfor -%}
+    </select>
+    
+    <div data-swatch-grid class="t4s-swatch-grid t4s-color-mode__{{ color_mode }} t4s-color-size__{{ bk_stts.color_size }} t4s-selector-mode__{{ selector_mode }}" data-product-featured='{"id": "{{product.id}}", "disableSwatch": false, "media": false,"enableHistoryState": false, "formID": "[data-swatch-grid]", "removeSoldout": false, "changeVariantByImg": false, "isNoPick": true,"hasSoldoutUnavailable": false,"enable_zoom_click_mb": null,"main_click": "null","canMediaGroup": false,"isGrouped": false,"hasIsotope": false,"available": true, "customBadge": null, "customBadgeHandle": null,"dateStart": 1656412880, "compare_at_price": null,"price": 4800, "isPreoder": false, "showFirstMedia": false }'>
+        {%- for option in product.options_with_values -%}
+        {%- liquid 
+          assign option_index   = 'option' | append: forloop.index
+          assign selected_value = current_variant[option_index]
+          assign option_name    = option.name
+          assign name_downcase  = option_name | downcase 
+        -%}
+        {%- if get_color contains name_downcase -%}
+          <div data-swatch-option data-id="{{ forloop.index0 }}" class="t4s-swatch-grid__option is-t4s-style__color is-t4s-name__{{ option_name | handle }} {% cycle 'is--first-color', '', '' %}">
+              <h4 class="t4s-swatch-grid__title"><span>{{ option_name }}: <span data-current-value class="t4s-swatch__current">{{ selected_value }}</span></span>{% if name_sizeg == name_downcase %}{{ html_sizeg }}{% endif %}</h4>
+              <div data-swatch-list class="t4s-swatch-grid__list">
+                  {%- if color_mode != 'dropdown' -%}
+                        {%- for value in option.values -%}
+                            <div data-swatch-item data-tooltip="top" title="{{ value | escape }}" class="t4s-swatch-grid__item {{ color_swatch }}bg_color_{{ value | handle }} lazyloadt4s{% if selected_value == value %} is--selected{% endif %}" data-value="{{ value | escape }}">{{ value }}</div>
+                        {%- endfor -%}
+                  {%- else -%}
+                      <button data-dropdown-open data-position="bottom-end" data-id="t4s_nt_{{ pr_sid }}{{ forloop.index }}"><span  data-current-value>{{ selected_value }}</span><svg class="t4s-icon-select-arrow" role="presentation" viewBox="0 0 19 12"><use xlink:href="#t4s-select-arrow"></use></svg></button>
+                      <div data-dropdown-wrapper class="t4s-dropdown__wrapper" id="t4s_nt_{{ pr_sid }}{{ forloop.index }}">
+                          <div class="t4s-drop-arrow"></div>
+                          <div class="t4s-dropdown__header">
+                          <span data-current-value class="t4s-dropdown__title">{{ selected_value }}</span>
+                          <button data-dropdown-close aria-label="{{ 'general.aria.close' | t }}"><svg role="presentation" class="t4s-iconsvg-close" viewBox="0 0 16 14"><path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path></svg></button>
+                          </div>
+                          <div class="t4s-dropdown__content">
+                          {%- for value in option.values -%}
+                          <div data-swatch-item data-dropdown-off class="t4s-swatch__item t4s-truncate {{ color_swatch }}bg_color_{{ value | handle }} lazyloadt4s{% if selected_value == value %} is--selected{% endif %}" data-value="{{ value | escape }}">{{ value }}</div>
+                          {%- endfor -%}
+                          </div>
+                      </div>
+                  {%- endif -%}
+              </div>
+          </div>  
+        {%- else -%}
+          <div data-swatch-option data-id="{{ forloop.index0 }}" class="t4s-swatch-grid__option is-t4s-name__{{ option_name | handle }}">
+              <h4 class="t4s-swatch-grid__title"><span>{{ option_name }}: <span data-current-value class="t4s-swatch__current">{{ selected_value }}</span></span>{% if name_sizeg == name_downcase %}{{ html_sizeg }}{% endif %}</h4>
+              <div class="t4s-swatch-grid__list">
+                  {%- if selector_mode != 'dropdown' -%}
+                      {%- for value in option.values -%}
+                          <div data-swatch-item class="t4s-swatch-grid__item{% if selected_value == value %} is--selected{% endif %}" data-value="{{ value | escape }}">{{ value }}</div>
+                      {%- endfor -%}
+                  {%- else -%}
+                      <button data-dropdown-open data-position="bottom-end" data-id="t4s_nt_{{ pr_sid }}{{ forloop.index }}"><span data-current-value>{{ selected_value }}</span><svg class="t4s-icon-select-arrow" role="presentation" viewBox="0 0 19 12"><use xlink:href="#t4s-select-arrow"></use></svg></button>
+                      <div data-dropdown-wrapper class="t4s-dropdown__wrapper" id="t4s_nt_{{ pr_sid }}{{ forloop.index }}">
+                          <div class="t4s-drop-arrow"></div>
+                          <div class="t4s-dropdown__header">
+                              <span data-current-value class="t4s-dropdown__title">{{ selected_value }}</span>
+                              <button data-dropdown-close aria-label="{{ 'general.aria.close' | t }}"><svg role="presentation" class="t4s-iconsvg-close" viewBox="0 0 16 14"><path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path></svg></button>
+                          </div>
+                          <div class="t4s-dropdown__content">
+                              {%- for value in option.values -%}
+                                  <div data-swatch-item data-dropdown-off class="t4s-swatch-grid__item t4s-truncate{% if selected_value == value %} is--selected{% endif %}" data-value="{{ value | escape }}">{{ value }}</div>
+                              {%- endfor -%}
+                          </div>
+                      </div>
+                  {%- endif -%}
+              </div>
+          </div>
+        {%- endif -%}
+        {%- endfor -%}
+    </div>
+    <script type="application/json" class="pr_variants_json">{{ product.variants | json }}</script>
+    <script type="application/json" class="pr_options_json">{{ product.options_with_values | json }}</script>
+{%- endform -%}
+[t4splitlz]
