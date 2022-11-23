@@ -73,8 +73,8 @@
             "button_text": "Shop Collection",
             "button_link": "shopify:\/\/collections\/women",
             "target_link": "_self",
-            "fontf": "inherit",
-            "button_style": "bordered",
+            "fontf": "3",
+            "button_style": "bordered_top",
             "icon_style": "1",
             "button_icon_w": 0,
             "border_w": 2,
@@ -352,7 +352,7 @@
             "mgb_tb": 0,
             "mgb_mb": 0,
             "hidden_mobile": false,
-            "animation": "fadeInUp"
+            "animation": "fadeInLeft"
           }
         },
         "350da60d-b87c-4c32-845c-3953e4bcf3eb": {
@@ -588,6 +588,42 @@
             "mgb_mb": 0,
             "animation": "none"
           }
+        },
+        "f13ebdb9-0feb-4c29-9c86-f66f3997720f": {
+          "type": "image",
+          "settings": {
+            "img_width": 0,
+            "img_width_tb": 0,
+            "img_width_mb": 0,
+            "img_link": "",
+            "hidden_mobile": false,
+            "mgb": 20,
+            "mgb_tb": 20,
+            "mgb_mb": 10,
+            "animation": "none"
+          }
+        },
+        "4bac8c19-31ed-4b68-abdb-7bc0e7489e66": {
+          "type": "countdown",
+          "settings": {
+            "date": "",
+            "cdt_des": "1",
+            "cdt_size": "medium",
+            "box_bdr": 0,
+            "bd_width": 0,
+            "space_item": 10,
+            "space_item_tb": 10,
+            "space_item_mb": 10,
+            "number_cl": "#fff",
+            "text_cl": "#fff",
+            "border_cl": "#000",
+            "bg_cl": "#000",
+            "hidden_mobile": false,
+            "mgb": 15,
+            "mgb_tb": 15,
+            "mgb_mb": 10,
+            "animation": "none"
+          }
         }
       },
       "block_order": [
@@ -608,10 +644,12 @@
         "44e9e963-2425-44e4-986e-9db7dc170a42",
         "dfb6ca82-f4ef-4484-85c9-44cf2e1a2d4d",
         "38ef5c17-42fe-4716-a7f2-ff113ad9b3cc",
-        "b0a593aa-324b-4947-b150-7b1a2086a125"
+        "b0a593aa-324b-4947-b150-7b1a2086a125",
+        "f13ebdb9-0feb-4c29-9c86-f66f3997720f",
+        "4bac8c19-31ed-4b68-abdb-7bc0e7489e66"
       ],
       "settings": {
-        "se_height": "t4s_ratio_cuspx",
+        "se_height": "t4s_ratioadapt_f_mix",
         "custom_dk": true,
         "height_dk": 775,
         "custom_tb": true,
@@ -637,12 +675,12 @@
         "btn_size": "small",
         "btn_hidden_mobile": false,
         "nav_dot": false,
-        "dots_width": "auto",
+        "dots_width": "container",
         "dots_align": "center",
         "dots_design": "default",
         "dot_owl": "default",
         "dots_cl": "dark",
-        "dots_pd_lr": 15,
+        "dots_pd_lr": 13,
         "dots_space": 10,
         "dots_pos_vy": 20,
         "unit_dots_vertical": "px",
