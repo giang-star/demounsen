@@ -1611,7 +1611,7 @@
             "target_link": "_self",
             "fontf": "inherit",
             "button_icon_w": 0,
-            "button_style": "default",
+            "button_style": "bordered",
             "border_w": 1,
             "button_effect": "sweep-to-top",
             "pri_cl": "#000000",
@@ -1714,13 +1714,25 @@
             "product": "simona-ribbed-cardigan",
             "rating": 5
           }
+        },
+        "91979062-3b8e-4779-9a3b-b06d3572a292": {
+          "type": "quote",
+          "settings": {
+            "heading": "",
+            "content": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+            "title": "Author's name",
+            "pos": "",
+            "product": "",
+            "rating": 5
+          }
         }
       },
       "block_order": [
         "1661595703cdf60243-0",
         "1661595703cdf60243-1",
         "1661595703cdf60243-2",
-        "cdee26a1-dd8c-4bc8-b2ff-fffb8f567d82"
+        "cdee26a1-dd8c-4bc8-b2ff-fffb8f567d82",
+        "91979062-3b8e-4779-9a3b-b06d3572a292"
       ],
       "settings": {
         "design_heading": "4",
