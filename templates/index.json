@@ -1611,7 +1611,7 @@
             "target_link": "_self",
             "fontf": "inherit",
             "button_icon_w": 0,
-            "button_style": "bordered",
+            "button_style": "link",
             "border_w": 1,
             "button_effect": "sweep-to-top",
             "pri_cl": "#000000",
