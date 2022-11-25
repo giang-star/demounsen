@@ -71,13 +71,13 @@
         "fbdf53dd-b875-43a9-8fc4-32d7164972fa": {
           "type": "custom_button",
           "settings": {
-            "button_text": "Shop Collection",
+            "button_text": "ádaasdsadasdasdsasadd",
             "button_link": "shopify:\/\/collections\/women",
             "target_link": "_self",
             "fontf": "3",
             "button_style": "bordered_top",
             "icon_style": "1",
-            "button_icon_w": 0,
+            "button_icon_w": 10,
             "border_w": 2,
             "button_effect": "rectangle-out",
             "pri_cl": "#222222",
