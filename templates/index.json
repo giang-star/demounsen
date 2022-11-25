@@ -109,7 +109,6 @@
         },
         "440535d9-9a49-4462-a1a1-97c6cd77fd6e": {
           "type": "pr_simple",
-          "disabled": true,
           "settings": {
             "product": "miley-triangle-hair-scarf",
             "show_image": false,
