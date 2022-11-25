@@ -231,7 +231,7 @@
             "fontf": "inherit",
             "button_style": "default",
             "icon_style": "1",
-            "button_icon_w": 0,
+            "button_icon_w": 16,
             "border_w": 1,
             "button_effect": "default",
             "pri_cl": "#222",
