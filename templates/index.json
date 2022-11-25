@@ -6,7 +6,7 @@
         "f9b8b909-6b31-45c2-b831-5b3090ac1662": {
           "type": "image_parent",
           "settings": {
-            "image": "shopify:\/\/shop_images\/person-fishing-on-the-beach-is-silhouetted-at-sunset.jpg",
+            "image": "shopify:\/\/shop_images\/rack-of-womens-clothing.jpg",
             "image_position": "9",
             "cl_img": "",
             "link_img1": "",
@@ -160,6 +160,43 @@
             "mgb_mb": 0,
             "animation": "none"
           }
+        },
+        "1bfa1c7a-0225-4c00-828d-ddf82a0761e6": {
+          "type": "image_parent",
+          "settings": {
+            "image_position": "8",
+            "cl_img": "",
+            "link_img1": "",
+            "open_link": "_blank",
+            "animate_slide": "none",
+            "text_align": "center",
+            "text_align_tb": "center",
+            "text_align_mb": "center",
+            "content_width": "container",
+            "cv_pos": 50,
+            "ch_pos": 50,
+            "cv_pos_tb": 50,
+            "ch_pos_tb": 50,
+            "cv_pos_mb": 50,
+            "ch_pos_mb": 50,
+            "bg_overlay": "#000",
+            "bg_opacity": 0,
+            "bg_content_cl": "#fff",
+            "bg_content_op": 0,
+            "content_pd_tb": 15,
+            "content_pd_lr": 15,
+            "content_pd_tb_mb": 10,
+            "content_pd_lr_mb": 10,
+            "border_bl": false,
+            "br_color": "#222",
+            "br_bg": "#fff",
+            "br_opacity": 50,
+            "br_style": "solid",
+            "br_pd": 20,
+            "br_pd_mb": 10,
+            "time_animation": 1,
+            "animation_delay": 40
+          }
         }
       },
       "block_order": [
@@ -167,7 +204,8 @@
         "0b215b33-6be3-402c-bb59-21ad36dfada5",
         "fbdf53dd-b875-43a9-8fc4-32d7164972fa",
         "440535d9-9a49-4462-a1a1-97c6cd77fd6e",
-        "4ce25bab-c7fb-4670-bb7a-70ed4ffe33e7"
+        "4ce25bab-c7fb-4670-bb7a-70ed4ffe33e7",
+        "1bfa1c7a-0225-4c00-828d-ddf82a0761e6"
       ],
       "settings": {
         "se_height": "t4s_ratioadapt_f_mix",
