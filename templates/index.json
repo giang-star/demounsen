@@ -265,7 +265,7 @@
           "type": "custom_button",
           "settings": {
             "button_text": "Button label",
-            "button_link": "",
+            "button_link": "shopify:\/\/collections",
             "target_link": "_self",
             "fontf": "inherit",
             "button_style": "default",
