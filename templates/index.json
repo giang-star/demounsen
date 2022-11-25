@@ -197,6 +197,35 @@
             "time_animation": 1,
             "animation_delay": 40
           }
+        },
+        "767dbcf2-888b-4f11-94fa-7bfb93f05db5": {
+          "type": "custom_text_circle",
+          "settings": {
+            "source": "themes_icon",
+            "icon_size": "medium",
+            "icon_themes": "t4s-flash",
+            "icon": "las la-headset",
+            "use_rds": false,
+            "text": "Text",
+            "time_tx_pin": 18,
+            "fontf": "inherit",
+            "text_cl": "#000",
+            "box_text_width": 200,
+            "text_fs": 6,
+            "text_fw": 500,
+            "text_ls": 2.1,
+            "mgb": 15,
+            "box_text_width_tb": 200,
+            "text_fs_tb": 6,
+            "text_ls_tb": 2.1,
+            "mgb_tb": 10,
+            "hidden_mobile": false,
+            "box_text_width_mb": 150,
+            "text_fs_mb": 6,
+            "text_ls_mb": 2.1,
+            "mgb_mb": 10,
+            "animation": "none"
+          }
         }
       },
       "block_order": [
@@ -205,7 +234,8 @@
         "fbdf53dd-b875-43a9-8fc4-32d7164972fa",
         "440535d9-9a49-4462-a1a1-97c6cd77fd6e",
         "4ce25bab-c7fb-4670-bb7a-70ed4ffe33e7",
-        "1bfa1c7a-0225-4c00-828d-ddf82a0761e6"
+        "1bfa1c7a-0225-4c00-828d-ddf82a0761e6",
+        "767dbcf2-888b-4f11-94fa-7bfb93f05db5"
       ],
       "settings": {
         "se_height": "t4s_ratioadapt_f_mix",
