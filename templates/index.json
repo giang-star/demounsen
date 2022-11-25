@@ -185,43 +185,6 @@
             "animation": "none"
           }
         },
-        "5de74fdd-4445-4a3d-9d9d-481a4126ff74": {
-          "type": "image_parent",
-          "settings": {
-            "image_position": "8",
-            "cl_img": "",
-            "link_img1": "",
-            "open_link": "_blank",
-            "animate_slide": "none",
-            "text_align": "center",
-            "text_align_tb": "center",
-            "text_align_mb": "center",
-            "content_width": "container",
-            "cv_pos": 50,
-            "ch_pos": 50,
-            "cv_pos_tb": 50,
-            "ch_pos_tb": 50,
-            "cv_pos_mb": 50,
-            "ch_pos_mb": 50,
-            "bg_overlay": "#000",
-            "bg_opacity": 0,
-            "bg_content_cl": "#fff",
-            "bg_content_op": 0,
-            "content_pd_tb": 15,
-            "content_pd_lr": 15,
-            "content_pd_tb_mb": 10,
-            "content_pd_lr_mb": 10,
-            "border_bl": false,
-            "br_color": "#222",
-            "br_bg": "#fff",
-            "br_opacity": 50,
-            "br_style": "solid",
-            "br_pd": 20,
-            "br_pd_mb": 10,
-            "time_animation": 1,
-            "animation_delay": 40
-          }
-        },
         "4fa8432a-7d8f-4d6f-b7f9-5b8a5ca89915": {
           "type": "custom_button",
           "settings": {
@@ -260,45 +223,6 @@
             "mgb_mb": 0,
             "animation": "none"
           }
-        },
-        "c20e0761-56dd-4b85-9521-7e96b1e8052e": {
-          "type": "custom_button",
-          "settings": {
-            "button_text": "Button label",
-            "button_link": "shopify:\/\/collections",
-            "target_link": "_self",
-            "fontf": "inherit",
-            "button_style": "default",
-            "icon_style": "1",
-            "button_icon_w": 0,
-            "border_w": 1,
-            "button_effect": "default",
-            "pri_cl": "#000000",
-            "second_cl": "#fff",
-            "pri_cl_hover": "#0ec1ae",
-            "second_cl_hover": "#fff",
-            "fsbutton": 14,
-            "fwbutton": 400,
-            "button_ls": 0,
-            "button_mh": 42,
-            "button_bdr": 0,
-            "button_pd_lr": 20,
-            "mgb": 0,
-            "button_icon_w_tb": 0,
-            "fsbutton_tb": 12,
-            "button_mh_tb": 36,
-            "button_pd_lr_tb": 15,
-            "button_ls_tb": 0,
-            "mgb_tb": 0,
-            "hidden_mobile": false,
-            "button_icon_w_mb": 0,
-            "fsbutton_mb": 10,
-            "button_mh_mb": 36,
-            "button_pd_lr_mb": 15,
-            "button_ls_mb": 0,
-            "mgb_mb": 0,
-            "animation": "none"
-          }
         }
       },
       "block_order": [
@@ -309,9 +233,7 @@
         "767dbcf2-888b-4f11-94fa-7bfb93f05db5",
         "3df4f870-f42e-421c-9065-4db424739f22",
         "1838a3e2-0995-4060-b38b-f989ce911218",
-        "5de74fdd-4445-4a3d-9d9d-481a4126ff74",
-        "4fa8432a-7d8f-4d6f-b7f9-5b8a5ca89915",
-        "c20e0761-56dd-4b85-9521-7e96b1e8052e"
+        "4fa8432a-7d8f-4d6f-b7f9-5b8a5ca89915"
       ],
       "settings": {
         "se_height": "t4s_ratio_fh",
