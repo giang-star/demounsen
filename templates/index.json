@@ -111,7 +111,7 @@
           "type": "pr_simple",
           "settings": {
             "product": "miley-triangle-hair-scarf",
-            "show_image": false,
+            "show_image": true,
             "color_text": "#000000",
             "color_line": "#cfcfcf",
             "mgb": 0,
