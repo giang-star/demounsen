@@ -603,28 +603,6 @@
             "mgb_mb": 10,
             "animation": "none"
           }
-        },
-        "4bac8c19-31ed-4b68-abdb-7bc0e7489e66": {
-          "type": "countdown",
-          "settings": {
-            "date": "",
-            "cdt_des": "1",
-            "cdt_size": "medium",
-            "box_bdr": 0,
-            "bd_width": 0,
-            "space_item": 10,
-            "space_item_tb": 10,
-            "space_item_mb": 10,
-            "number_cl": "#ffffff",
-            "text_cl": "#ffffff",
-            "border_cl": "#000000",
-            "bg_cl": "#000000",
-            "hidden_mobile": false,
-            "mgb": 15,
-            "mgb_tb": 15,
-            "mgb_mb": 10,
-            "animation": "none"
-          }
         }
       },
       "block_order": [
@@ -646,8 +624,7 @@
         "dfb6ca82-f4ef-4484-85c9-44cf2e1a2d4d",
         "38ef5c17-42fe-4716-a7f2-ff113ad9b3cc",
         "b0a593aa-324b-4947-b150-7b1a2086a125",
-        "f13ebdb9-0feb-4c29-9c86-f66f3997720f",
-        "4bac8c19-31ed-4b68-abdb-7bc0e7489e66"
+        "f13ebdb9-0feb-4c29-9c86-f66f3997720f"
       ],
       "settings": {
         "se_height": "t4s_ratioadapt_f_mix",
