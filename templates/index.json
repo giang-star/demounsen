@@ -196,7 +196,7 @@
             "icon_style": "1",
             "button_icon_w": 16,
             "border_w": 1,
-            "button_effect": "default",
+            "button_effect": "sweep-to-right",
             "pri_cl": "#f01717",
             "second_cl": "#ffffff",
             "pri_cl_hover": "#0ec1ae",
