@@ -399,6 +399,41 @@
             "mgb_mb": 0,
             "animation": "none"
           }
+        },
+        "44fde8a6-cf6b-4464-a62e-46ae2c390db3": {
+          "type": "html",
+          "settings": {
+            "html_content": "azcxczxczxc",
+            "hidden_mobile": false,
+            "animation": "none"
+          }
+        },
+        "7403b57d-b452-4e2a-a3d8-de7455c78e14": {
+          "type": "custom_text",
+          "settings": {
+            "text": "Text",
+            "remove_br_tag": false,
+            "tag": "p",
+            "fontf": "inherit",
+            "text_cl": "#fff",
+            "text_fs": 16,
+            "text_lh": 0,
+            "text_fw": 400,
+            "text_ls": 0,
+            "mgb": 15,
+            "font_italic": false,
+            "text_shadow": false,
+            "text_fs_tb": 16,
+            "text_lh_tb": 0,
+            "text_ls_tb": 0,
+            "mgb_tb": 10,
+            "hidden_mobile": false,
+            "text_fs_mb": 16,
+            "text_lh_mb": 0,
+            "text_ls_mb": 0,
+            "mgb_mb": 10,
+            "animation": "none"
+          }
         }
       },
       "block_order": [
@@ -414,7 +449,9 @@
         "51f445fb-90d9-4d57-8a7e-fe8be8607a1e",
         "d81048ac-2f12-4af8-b1d8-63f1d112db14",
         "fe7e42cc-9c40-4fa6-8395-f8bd854cd3b0",
-        "000f1607-7469-492d-afd5-5edd39a287c8"
+        "000f1607-7469-492d-afd5-5edd39a287c8",
+        "44fde8a6-cf6b-4464-a62e-46ae2c390db3",
+        "7403b57d-b452-4e2a-a3d8-de7455c78e14"
       ],
       "settings": {
         "se_height": "t4s_ratio_fh",
