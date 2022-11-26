@@ -288,6 +288,7 @@
         "d81048ac-2f12-4af8-b1d8-63f1d112db14": {
           "type": "image_parent",
           "settings": {
+            "image": "shopify:\/\/shop_images\/person-fishing-on-the-beach-is-silhouetted-at-sunset.jpg",
             "image_position": "8",
             "cl_img": "",
             "link_img1": "",
@@ -411,7 +412,7 @@
         "7403b57d-b452-4e2a-a3d8-de7455c78e14": {
           "type": "custom_text",
           "settings": {
-            "text": "Text",
+            "text": "Textdfgdfgdfgdfgfdgdgfdgfdg",
             "remove_br_tag": false,
             "tag": "p",
             "fontf": "inherit",
