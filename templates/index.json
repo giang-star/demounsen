@@ -435,6 +435,43 @@
             "mgb_mb": 10,
             "animation": "none"
           }
+        },
+        "6ae93573-8a90-489f-bf86-a633508af04b": {
+          "type": "image_parent",
+          "settings": {
+            "image_position": "8",
+            "cl_img": "",
+            "link_img1": "",
+            "open_link": "_blank",
+            "animate_slide": "none",
+            "text_align": "center",
+            "text_align_tb": "center",
+            "text_align_mb": "center",
+            "content_width": "container",
+            "cv_pos": 50,
+            "ch_pos": 50,
+            "cv_pos_tb": 50,
+            "ch_pos_tb": 50,
+            "cv_pos_mb": 50,
+            "ch_pos_mb": 50,
+            "bg_overlay": "#000",
+            "bg_opacity": 0,
+            "bg_content_cl": "#fff",
+            "bg_content_op": 0,
+            "content_pd_tb": 15,
+            "content_pd_lr": 15,
+            "content_pd_tb_mb": 10,
+            "content_pd_lr_mb": 10,
+            "border_bl": false,
+            "br_color": "#222",
+            "br_bg": "#fff",
+            "br_opacity": 50,
+            "br_style": "solid",
+            "br_pd": 20,
+            "br_pd_mb": 10,
+            "time_animation": 1,
+            "animation_delay": 40
+          }
         }
       },
       "block_order": [
@@ -452,7 +489,8 @@
         "fe7e42cc-9c40-4fa6-8395-f8bd854cd3b0",
         "000f1607-7469-492d-afd5-5edd39a287c8",
         "44fde8a6-cf6b-4464-a62e-46ae2c390db3",
-        "7403b57d-b452-4e2a-a3d8-de7455c78e14"
+        "7403b57d-b452-4e2a-a3d8-de7455c78e14",
+        "6ae93573-8a90-489f-bf86-a633508af04b"
       ],
       "settings": {
         "se_height": "t4s_ratio_fh",
@@ -541,13 +579,23 @@
             "title": "24\/7 Support",
             "text": "<p>Contact us 24 hours a day, 7 days a week<\/p>"
           }
+        },
+        "1e7bb29b-d988-42a6-a5dc-2599a11232b7": {
+          "type": "shipping",
+          "settings": {
+            "icon_themes": "car",
+            "icon": "las la-headphones",
+            "title": "Add a heading",
+            "text": "<p>Use this text to describe<\/p>"
+          }
         }
       },
       "block_order": [
         "165874024061d2b38d-0",
         "165874024061d2b38d-1",
         "165874024061d2b38d-2",
-        "165874024061d2b38d-3"
+        "165874024061d2b38d-3",
+        "1e7bb29b-d988-42a6-a5dc-2599a11232b7"
       ],
       "settings": {
         "design_heading": "1",
@@ -680,6 +728,26 @@
             "collection_link": "",
             "button_label": "Shop Now"
           }
+        },
+        "23cef5be-883f-4be2-8921-decf589a52ad": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "title": "",
+            "collection_badge": "",
+            "collection_link": "",
+            "button_label": "Shop Now"
+          }
+        },
+        "4a0d7d70-4acd-4b5f-a408-07061e3748bf": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "title": "",
+            "collection_badge": "",
+            "collection_link": "",
+            "button_label": "Shop Now"
+          }
         }
       },
       "block_order": [
@@ -689,7 +757,9 @@
         "1660729094cdd747a3-3",
         "554ad53f-6f35-4554-a6fd-b384ea194a3f",
         "4c9e5c57-dc41-4426-8ae9-65b841a8dfe2",
-        "b935a703-20ae-4742-84a5-7c32cebc6426"
+        "b935a703-20ae-4742-84a5-7c32cebc6426",
+        "23cef5be-883f-4be2-8921-decf589a52ad",
+        "4a0d7d70-4acd-4b5f-a408-07061e3748bf"
       ],
       "settings": {
         "design_heading": "1",
