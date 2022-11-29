@@ -531,7 +531,7 @@
         "dots_round": false,
         "dots_hidden_mobile": false,
         "layout": "t4s-container-fluid",
-        "cl_bg": "",
+        "cl_bg": "#ef1313",
         "cl_bg_gradient": "",
         "mg": "",
         "pd": "",
@@ -762,10 +762,10 @@
         "4a0d7d70-4acd-4b5f-a408-07061e3748bf"
       ],
       "settings": {
-        "design_heading": "1",
+        "design_heading": "4",
         "heading_center": false,
         "top_heading": "Shop <br> by [categories]",
-        "top_subheading": "",
+        "top_subheading": "<p>dfdsfsdsadasdadad<\/p>",
         "tophead_mb": 30,
         "tophead_mb_tb": 30,
         "tophead_mb_mb": 20,
