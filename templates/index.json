@@ -868,7 +868,6 @@
             "padding_inner": "",
             "padding_inner_tb": "",
             "padding_inner_mb": "",
-            "bg_image": "shopify:\/\/shop_images\/girda.png",
             "bg_cl": "#f8f3f1",
             "time_animation": 1,
             "animation_delay": 40
@@ -877,6 +876,7 @@
         "ad9391b6-47c8-422c-8fb7-ffe391b86981": {
           "type": "image",
           "settings": {
+            "image_child": "shopify:\/\/shop_images\/girda.png",
             "img_link": "",
             "open_link": "_self",
             "img_width": 0,
