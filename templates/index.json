@@ -877,7 +877,6 @@
         "ad9391b6-47c8-422c-8fb7-ffe391b86981": {
           "type": "image",
           "settings": {
-            "image_child": "shopify:\/\/shop_images\/girda.png",
             "img_link": "",
             "open_link": "_self",
             "img_width": 0,
