@@ -556,7 +556,7 @@
         "165874024061d2b38d-1": {
           "type": "shipping",
           "settings": {
-            "icon_themes": "box2",
+            "icon_themes": "none",
             "icon": "las la-redo-alt",
             "title": "14 Days Return",
             "text": "<p>Simply return it within 30 days for an exchange.<\/p>"
@@ -565,7 +565,7 @@
         "165874024061d2b38d-2": {
           "type": "shipping",
           "settings": {
-            "icon_themes": "shield1",
+            "icon_themes": "none",
             "icon": "las la-shield-alt",
             "title": "Security Payment",
             "text": "<p>We ensure secure payment with PEV<\/p>"
@@ -574,7 +574,7 @@
         "165874024061d2b38d-3": {
           "type": "shipping",
           "settings": {
-            "icon_themes": "customer-service",
+            "icon_themes": "none",
             "icon": "las la-phone",
             "title": "24\/7 Support",
             "text": "<p>Contact us 24 hours a day, 7 days a week<\/p>"
@@ -583,7 +583,7 @@
         "1e7bb29b-d988-42a6-a5dc-2599a11232b7": {
           "type": "shipping",
           "settings": {
-            "icon_themes": "car",
+            "icon_themes": "none",
             "icon": "las la-headphones",
             "title": "Add a heading",
             "text": "<p>Use this text to describe<\/p>"
@@ -601,7 +601,7 @@
         "design_heading": "1",
         "heading_center": true,
         "top_heading": "",
-        "top_subheading": "<p><\/p>",
+        "top_subheading": "",
         "tophead_mb": 30,
         "tophead_mb_tb": 30,
         "tophead_mb_mb": 25,
