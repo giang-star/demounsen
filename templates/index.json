@@ -547,7 +547,7 @@
         "165874024061d2b38d-0": {
           "type": "shipping",
           "settings": {
-            "icon_themes": "box1",
+            "icon_themes": "none",
             "icon": "las la-truck",
             "title": "Shipping Worldwide",
             "text": "<p>Free shipping on all US order or order above $100<\/p>"
@@ -601,7 +601,7 @@
         "design_heading": "1",
         "heading_center": true,
         "top_heading": "",
-        "top_subheading": "<p><\/p>",
+        "top_subheading": "",
         "tophead_mb": 30,
         "tophead_mb_tb": 30,
         "tophead_mb_mb": 25,
