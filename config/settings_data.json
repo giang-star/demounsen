@@ -302,7 +302,7 @@
               "lb_cl": "",
               "lazy_mn": true,
               "pos_sub": "bottom",
-              "pos": "left"
+              "cus_wid": 268
             }
           },
           "33913b92-e16c-45fc-954a-9ca9a0010059": {
@@ -319,7 +319,7 @@
               "lb_cl": "",
               "lazy_mn": true,
               "pos_sub": "bottom",
-              "pos": "left"
+              "cus_wid": 268
             }
           }
         },
@@ -872,8 +872,8 @@
               "form_width_tb": 500,
               "form_width_mb": 350,
               "newl_size": "medium",
-              "source_btn": "icon",
-              "news_icon": "plane",
+              "source_btn": "text",
+              "news_icon": "long-arrow",
               "input_cl": "#868686",
               "btn_cl": "#000000",
               "btn_hover_cl": "#0ec1ae",
@@ -1593,7 +1593,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "6db4fcec-6ce4-4378-8e67-ad1d7620ddcf": {
@@ -1610,7 +1617,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#000000",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "c19205c4-f8e9-4d22-ab5a-b60eadf7e601": {
@@ -1627,7 +1641,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "cab79898-7bad-4da7-9bda-1a58ee78a8f1": {
@@ -1644,7 +1665,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "c14f2d7e-0cab-40ed-96a7-1e0eb2531c35": {
@@ -1667,7 +1695,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "bf2860c1-d2ab-4b8c-926c-d9c5c2cbe99e": {
@@ -1685,7 +1720,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "a988071f-aa7d-4814-a689-81779aae617e": {
@@ -1708,7 +1750,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           },
           "e8707210-68be-4758-bc5b-1b31da65e12d": {
@@ -1725,7 +1774,14 @@
               "compare_color": "#ffffff",
               "compare_color_hover": "#000000",
               "size_list_color": "#ffffff",
-              "size_list_color_info": "#000000"
+              "size_list_color_info": "#000000",
+              "hidden_atc_mb": false,
+              "hidden_qv_mb": false,
+              "hidden_wishlist_mb": false,
+              "hidden_compare_mb": false,
+              "hidden_pr_colors": false,
+              "hidden_pr_sizes": false,
+              "hidden_pr_countdown": false
             }
           }
         },
